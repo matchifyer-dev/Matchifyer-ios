@@ -1,0 +1,25 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 60
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.matchifyerllc.matchifyer
+      vars:
+        XCODE_WORKSPACE: "Matchifyer.xcworkspace"
+        XCODE_SCHEME: "Matchifyer"
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install CocoaPods dependencies
+        script: |
+          cd $CM_BUILD_DIR
+          pod install
+      - name: Build iOS app
+        script: |
+          xcode-project build-ipa \
+            --workspace "$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
