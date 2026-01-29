@@ -71,7 +71,7 @@ func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
     }
 }
 
-extension ViewController: WKUIDelegate, WKDownloadDelegate {
+extension ViewController: WKUIDelegate {
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if (navigationAction.targetFrame == nil) { webView.load(navigationAction.request) }
         return nil
